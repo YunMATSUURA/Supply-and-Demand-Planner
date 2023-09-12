@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/object.css">
+  <link rel="icon" href="img/favicon.png">
+  <title>S&D Planner</title>
+
+</head>
+<body>
+
+  <div id="opening-screen" class="opening">
+    <div id="opening-title">
+      <p class="opening-title-p opening hidden">S</p>
+      <p class="opening-title-p opening hidden">&</p>
+      <p class="opening-title-p opening hidden">D</p>
+      <p class="opening-title-p opening hidden">P</p>
+      <p class="opening-title-p opening hidden">l</p>
+      <p class="opening-title-p opening hidden">a</p>
+      <p class="opening-title-p opening hidden">n</p>
+      <p class="opening-title-p opening hidden">n</p>
+      <p class="opening-title-p opening hidden">e</p>
+      <p class="opening-title-p opening hidden">r</p>
+    </div>
+  </div>
+
+  <header> 
+    <div id="header-title">
+      <h1 >Supply and Demand Planner</h1>
+    </div>
+  </header>
+
+  <main>
+  
+		<div class="item-guidance">
+		  <h3>Item Search Guidance</h3>
+		    <p class="guidance-p">
+		       "Item"s are AA0001, AA0002 ... AA0245. Input is Case-Insensitive.
+		     </p>          
+		</div>
+
+  <div class="main-contents">
+  
+    <div class="item-area">
+      <form action="" id="itemSelector">
+        <label for="itemNumber" id="item-label">Item : </label>
+        <input type="text" name="itemNumber" id="itemNumberText">
+        <input type="button" name="itemNumber" value="Refresh" id="itemCheckButton" class="general-button">
+      </form>
+      <p id="description">Item Description</p>
+    </div>
+
+    <div class="top-area">
+
+      <!-- left half -->
+      <div id="top-left">
+        <canvas id="demand-graph-area"></canvas>
+      </div>
+
+      <!-- right half -->
+      <div id="top-right">
+        <div id="sku-parameter-tables-area">
+          <table class="param-tables sku-parameter-table-1">
+            <tr><td class="param-td">Strategic Product</td><td class="param-td" id="asl"></td></tr> 
+            <tr><td class="param-td">Product Life Cycle</td><td class="param-td" id="life-cycle"></td></tr>
+            <tr><td class="param-td">Demand Freq.</td><td class="param-td" id="abc-rank"></td></tr>
+            <tr><td class="param-td">Safety Stock</td><td class="param-td" id="safty-stock"></td></tr> 
+            <tr><td class="param-td">Open BO</td><td class="param-td" id="open-bo"></td></tr>
+            <tr><td class="param-td">Monthly Order Qty</td><td class="param-td" id="reg-qty"></td></tr>
+          </table>
+    
+          <table class="param-tables sku-parameter-table-2">
+            <tr><td class="param-td">Purchase Price</td><td class="param-td" id="fob-price"></td></tr>
+            <tr><td class="param-td">Package Qty</td><td class="param-td" id="spq"></td></tr>
+            <tr><td class="param-td">Importance</td><td class="param-td" id="importance"></td></tr>
+            <tr><td class="param-td">Forecasting</td><td class="param-td" id="forecasting"></td></tr>
+            <tr><td class="param-td">Necessary Qty</td><td class="param-td" id="necessary-qty"></td></tr>
+            <tr><td class="param-td">ADD Order Qty</td><td class="param-td" id="add-qty"></td></tr>
+          </table>
+        </div>
+
+        <div id="psi_area">
+          <table id="psi_area_table">
+            <tr id="psi_area_table_header">
+              <th class="psi-data" id="psi-header-category"></th>
+              <th class="psi-data" id="psi-headerN4"></th>
+              <th class="psi-data" id="psi-headerN3"></th>
+              <th class="psi-data" id="psi-headerN2"></th>
+              <th class="psi-data" id="psi-headerN1"></th>
+              <th class="psi-data" id="psi-headerN0"></th>
+              <th class="psi-data" id="psi-headerN-1"></th>
+            </tr>
+            <tr id="psi_area_table_order">
+              <td id="psi-order-category"></td>
+              <td>
+                <input type="text" class="psi-input" id="psi-orderN4">
+              </td>
+              <td>
+                <input type="text" class="psi-input" id="psi-orderN3">
+              </td>
+              <td>
+                <input type="text" class="psi-input" id="psi-orderN2">
+              </td>
+              <td>
+                <input type="text" class="psi-input" id="psi-orderN1">
+              </td>
+              <td>
+                <input type="text" class="psi-input" id="psi-orderN0">
+              </td>
+              <td id="psi-orderN-1"></td>
+            </tr>
+            <tr id="psi_area_table_incoming">
+              <td id="psi-incoming-category"></td>
+              <td>
+                <input type="text" class="psi-input" id="psi-incomingN4">
+              </td>
+              <td>
+                <input type="text" class="psi-input" id="psi-incomingN3">
+              </td>
+              <td>
+                <input type="text" class="psi-input" id="psi-incomingN2">
+              </td>
+              <td>
+                <input type="text" class="psi-input" id="psi-incomingN1">
+              </td>
+              <td>
+                <input type="text" class="psi-input" id="psi-incomingN0">
+              </td>
+              <td id="psi-incomingN-1"></td>
+            </tr>
+
+            <tr id="psi_area_table_forecast">
+              <td id="psi-forecast-category"></td>
+              <td>
+                <input type="text" class="psi-input" id="psi-forecastN4">
+              </td>
+              <td>
+                <input type="text" class="psi-input" id="psi-forecastN3">
+              </td>
+              <td>
+                <input type="text" class="psi-input" id="psi-forecastN2">
+              </td>
+              <td>
+                <input type="text" class="psi-input" id="psi-forecastN1">
+              </td>
+              <td>
+                <input type="text" class="psi-input" id="psi-forecastN0">
+              </td>
+              <td id="psi-forecastN-1"></td>
+            </tr>
+            
+            <tr id="psi_area_table_endStock">
+              <td id="psi-endStock-category"></td>
+              <td id="psi-endStockN4"></td>
+              <td id="psi-endStockN3"></td>
+              <td id="psi-endStockN2"></td>
+              <td id="psi-endStockN1"></td>
+              <td id="psi-endStockN0"></td>
+              <td id="psi-endStockN-1"></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  
+      <div class="bottom-area">
+        <div id="demand-table-area">
+          <table id="demand-table-area_table">
+            <tr>
+            <th>Month</th>
+	            <th class="month-name" id="monthName-12"></th>
+	            <th class="month-name" id="monthName-11"></th>
+	            <th class="month-name" id="monthName-10"></th>
+	            <th class="month-name" id="monthName-9"></th>
+	            <th class="month-name" id="monthName-8"></th>
+	            <th class="month-name" id="monthName-7"></th>
+	            <th class="month-name" id="monthName-6"></th>
+	            <th class="month-name" id="monthName-5"></th>
+	            <th class="month-name" id="monthName-4"></th>
+	            <th class="month-name" id="monthName-3"></th>
+	            <th class="month-name" id="monthName-2"></th>
+	            <th class="month-name" id="monthName-1"></th>
+            </tr>
+          </table>
+          <table id="demand-table-area_table">
+            <tr id="demand-table-area_table_table-header">
+              <th>Month</th>
+              <th>N-12</th>
+              <th>N-11</th>
+              <th>N-10</th>
+              <th>N-9</th>
+              <th>N-8</th>
+              <th>N-7</th>
+              <th>N-6</th>
+              <th>N-5</th>
+              <th>N-4</th>
+              <th>N-3</th>
+              <th>N-2</th>
+              <th>N-1</th>
+              
+              <th>12mth Ave</th>
+              <th>6mth Ave</th>
+            </tr>
+            <tr id="demand-table-area_table_demand-data">
+              <td>Result</td>
+              <td class="result" id="n-12s"></td>
+              <td class="result" id="n-11s"></td>
+              <td class="result" id="n-10s"></td>
+              <td class="result" id="n-9s"></td>
+              <td class="result" id="n-8s"></td>
+              <td class="result" id="n-7s"></td>
+              <td class="result" id="n-6s"></td>
+              <td class="result" id="n-5s"></td>
+              <td class="result" id="n-4s"></td>
+              <td class="result" id="n-3s"></td>
+              <td class="result" id="n-2s"></td>
+              <td class="result" id="n-1s"></td>
+              
+              <td class="result" id="12mth-ave"></td>
+              <td class="result" id="6mth-ave"></td>
+            </tr>
+          </table>
+          <table id="demand-table-area_table">
+            <tr id="demand-table-area_table_table-header">
+              <th>Month</th>
+              <th>N</th>
+              <th>N+1</th>
+              <th>N+2</th>
+              <th>N+3</th>
+              <th>N+4</th>
+              <th>N+5</th>
+              <th>N+6</th>
+              <th>N+7</th>
+              <th>N+8</th>
+              <th>N+9</th>
+              <th>N+10</th>
+              <th>N+11</th>
+            </tr>
+            <tr id="demand-table-area_table_forecast-data">
+              <td>Forecast</td>
+              <td class="forecast" id="n+0s"></td>
+              <td class="forecast" id="n+1s"></td>
+              <td class="forecast" id="n+2s"></td>
+              <td class="forecast" id="n+3s"></td>
+              <td class="forecast" id="n+4s"></td>
+              <td class="forecast" id="n+5s"></td>
+              <td class="forecast" id="n+6s"></td>
+              <td class="forecast" id="n+7s"></td>
+              <td class="forecast" id="n+8s"></td>
+              <td class="forecast" id="n+9s"></td>
+              <td class="forecast" id="n+10s"></td>
+              <td class="forecast" id="n+11s"></td>
+            </tr>
+          </table>
+        </div>   
+        <div class="disclaimer">
+            <h3>Sample Application</h3>
+            <p class="disclaimer-p">
+              This web application is the one which I added modification to the actually used web application that I built. <br>All of the product information and data are fiction while the fiction to simulate supply and demand can be used practically.<br>
+            </p>          
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <!-- <script src="js/charjs.js"></script> -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
+  <script src="js/opening.js"></script>
+  <script src="js/getU020.js"></script>
+  <script src="js/getPSI.js"></script>
+  <script src="js/getOrderSuggestion.js"></script>
+  <script src="js/displayData.js"></script>
+  
+</body>
+</html>
